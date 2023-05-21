@@ -1,0 +1,19 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "globals": {
+    "firebase": "readonly",
+    "importScripts": "readonly",
+    "self": "readonly",
+    "process": "readonly"
+  }
+}
