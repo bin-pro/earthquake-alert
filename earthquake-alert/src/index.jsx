@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { sendTokenToServer } from "./api";
+import { sendTokenToServer } from "./utils/api";
 import App from "./App";
 import firebase from "firebase/app";
 import "firebase/messaging";
