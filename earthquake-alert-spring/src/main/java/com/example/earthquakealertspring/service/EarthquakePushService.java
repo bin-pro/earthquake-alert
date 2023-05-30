@@ -35,7 +35,6 @@ public class EarthquakePushService {
         this.serviceKey = serviceKey;
         this.fcmTokenService = fcmTokenService;
         this.fcmTokenRepository = fcmTokenRepository;
-        this.lastSentData = null; // 초기화
     }
 
     @Scheduled(fixedRate = 60000)
@@ -79,33 +78,14 @@ public class EarthquakePushService {
             EarthquakeDto newEarthquakeDto = earthquakeDtos.get(0);
             logger.info("newEarthquakeDto: " + newEarthquakeDto.toString());
             // null 검사를 실시합니다.
-            if (newEarthquakeDto != null && isNewAndSignificantEarthquake(newEarthquakeDto)) {
+            if (newEarthquakeDto != null) {
                 sendFCMPushNotification(newEarthquakeDto);
             } else {
-                logger.info("No new significant earthquake data found.");
+                logger.info("No new earthquake data found.");
             }
         }
     }
-    private boolean isNewAndSignificantEarthquake(EarthquakeDto newEarthquakeDto) {
-        // 첫 번째 지진 데이터를 받았을 때
-        if (lastSentData == null) {
-            return true;
-        }
-        
-        // 마지막으로 보낸 데이터와 시간이 같으면, 새로운 지진이 아닙니다.
-        if (newEarthquakeDto.getTmEqk().equals(lastSentData.getTmEqk())) {
-            return false;
-        }
-    
-        // 규모 5.0 이상이면서 fcTp가 11 혹은 14인 지진만 알림을 보냅니다.
-        double mt = newEarthquakeDto.getMt();
-        int fcTp = newEarthquakeDto.getFcTp();
 
-        lastSentData = newEarthquakeDto;
-        
-        return mt >= 5.0 && (fcTp == 11 || fcTp == 14);
-    }
-    
     private void sendFCMPushNotification(EarthquakeDto earthquakeDto) {
         List<FCMTokenEntity> tokens = fcmTokenRepository.findAll();
 

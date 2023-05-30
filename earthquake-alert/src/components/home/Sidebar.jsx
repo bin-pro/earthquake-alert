@@ -132,8 +132,8 @@ const Sidebar = ({
         placeAddress: clickedLocation.address,
         placeLat: clickedLocation.lat,
         placeLng: clickedLocation.lng,
-        shelterDtoList: shelterList
-      })
+        shelterDtoList: shelterList,
+      }),
     }).then(
       (res) => {
         if (res.ok) {
@@ -160,8 +160,8 @@ const Sidebar = ({
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     }).then(
       (res) => {
         if (res.ok) {

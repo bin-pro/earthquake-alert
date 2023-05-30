@@ -43,33 +43,20 @@ const App = () => {
   useEffect(() => {
     const messaging = firebase.messaging();
 
-    // 비동기 함수 선언
-    const requestPermissionAndInitializeMessaging = async () => {
-      // Notification API 지원 여부 확인
-      if (!("Notification" in window)) {
-        console.log("이 브라우저는 Notification API를 지원하지 않습니다.");
-        return;
-      }
+    if (Notification.permission === "granted") {
+      messaging
+        .getToken({ vapidKey: process.env.REACT_APP_VAPID_KEY })
+        .then((currentToken) => {
+          if (currentToken) {
+            sendTokenToServer(currentToken);
+          } else {
+            console.log("지진 조기경보 시 푸시 알람을 받아보실 수 없습니다.");
+          }
+        })
+        .catch((err) => {
+          console.log("An error occurred while retrieving token. ", err);
+        });
 
-      // 권한 요청
-      const permission = await Notification.requestPermission();
-      if (permission !== "granted") {
-        console.log("푸시 알람 권한이 거부되었습니다.");
-        return;
-      }
-      console.log("알림 권한이 허용되었습니다.");
-
-      // 토큰 가져오기
-      const currentToken = await messaging.getToken({
-        vapidKey: process.env.REACT_APP_VAPID_KEY,
-      });
-      if (currentToken) {
-        sendTokenToServer(currentToken);
-      } else {
-        console.log("지진 조기경보 시 푸시 알람을 받아보실 수 없습니다.");
-      }
-
-      // 메시지 핸들러 등록
       messaging.onMessage((payload) => {
         console.log("Message received. ", payload);
         const data = {
@@ -83,10 +70,9 @@ const App = () => {
         setEarthquakeData(data);
         setShowEarthquakeModal(true);
       });
-    };
-
-    // 비동기 함수 호출
-    requestPermissionAndInitializeMessaging();
+    } else {
+      console.log("푸시 알람 권한이 거부되었습니다.");
+    }
   }, [navigate]);
 
   const closeEarthquakeModal = () => {
