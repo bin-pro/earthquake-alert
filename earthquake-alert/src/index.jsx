@@ -8,12 +8,8 @@ import "firebase/compat/messaging";
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker.register("/firebase-messaging-sw.js").then(
-      function (registration) {
-        console.log("서비스 워커 등록 성공: ", registration.scope);
-      },
-      function (err) {
-        console.log("서비스 워커 등록 실패: ", err);
-      }
+      function (registration) {},
+      function (err) {}
     );
   });
 }

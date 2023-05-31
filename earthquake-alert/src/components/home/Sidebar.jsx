@@ -100,9 +100,7 @@ const Sidebar = ({
         (res) => {
           setBookmarks(res.favoritePlaces);
         },
-        (error) => {
-          console.log(error);
-        }
+        (error) => {}
       );
   };
 
@@ -150,7 +148,7 @@ const Sidebar = ({
         }
       },
       (error) => {
-        console.log(error);
+        error;
       }
     );
   };
@@ -178,9 +176,7 @@ const Sidebar = ({
           window.location.reload();
         }
       },
-      (error) => {
-        console.log(error);
-      }
+      (error) => {}
     );
   };
 
@@ -266,9 +262,6 @@ const Sidebar = ({
           });
 
           nearbyShelterRef.current = sortedFilteredShelter.slice(0, 3);
-
-          /* console.log(nearbyShelterRef.current);
-          console.log(lat, lng, location); */
         }
       });
     };
