@@ -53,7 +53,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             case "naver":
                 log.info("Auth provider: {}", authProvider);
                 Map<String, String> response = (HashMap<String, String>) oAuth2User.getAttributes().get("response");
-                email = (String) response.get("email");
+                email = (String) response.get("id");
                 name  = (String) response.get("name");
                 break;
             default:
