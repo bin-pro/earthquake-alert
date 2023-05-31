@@ -90,9 +90,7 @@ const SocialLogin = ({ isMenuOpen }) => {
             window.location.reload();
           }
         })
-        .catch((error) => {
-          //console.log(error);
-        });
+        .catch((error) => {});
     }
   };
 

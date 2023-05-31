@@ -65,13 +65,8 @@ export const fetchMapPlaceData = async () => {
 
       return combinedShelterData;
     } else {
-      console.error(
-        `API 요청 중 문제가 발생했습니다: ${outdoorData.TlEtqkP.RESULT.MESSAGE}`
-      );
     }
-  } catch (error) {
-    console.error(`API 요청 중 문제가 발생했습니다: ${error.message}`);
-  }
+  } catch (error) {}
 };
 
 export const fetchShelterTableData = async (gu, dong) => {
@@ -90,13 +85,9 @@ export const fetchShelterTableData = async (gu, dong) => {
       });
       return filteredData;
     } else {
-      console.error(
-        `API 요청 중 문제가 발생했습니다: ${data.TlEtqkP.RESULT.MESSAGE}`
-      );
       return [];
     }
   } catch (error) {
-    console.error(`API 요청 중 문제가 발생했습니다: ${error.message}`);
     return [];
   }
 };
@@ -134,13 +125,9 @@ export const fetchRecordTableData = async (si, startDate, endDate) => {
       });
       return filteredData;
     } else {
-      console.error(
-        `API 요청 중 문제가 발생했습니다: ${data.TbEqkKenvinfo.RESULT.MESSAGE}`
-      );
       return [];
     }
   } catch (error) {
-    console.error(`API 요청 중 에러가 발생했습니다: ${error.message}`);
     return [];
   }
 };
