@@ -24,10 +24,6 @@ spring:
             client-secret: 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
             #배포
             redirect-uri: https://server.earthquake-alert.site/oauth2/callback/google
-            #도커
-            #            redirect-uri: http://localhost:8081/oauth2/callback/google
-            #로컬
-            #            redirect-uri: http://localhost:8080/oauth2/callback/google
             scope: https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/userinfo.profile
             authorization-grant-type: authorization_code
           kakao:
@@ -58,7 +54,7 @@ spring:
             #            redirect-uri: http://localhost:8080/oauth2/callback/naver
             authorization-grant-type: authorization_code
             client-authentication-method: POST
-            scope: name, email
+            scope: name
             client-name: naver
         provider:
           kakao:
