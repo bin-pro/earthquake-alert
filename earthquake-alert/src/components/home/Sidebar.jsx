@@ -147,9 +147,7 @@ const Sidebar = ({
           window.location.reload();
         }
       },
-      (error) => {
-        error;
-      }
+      (error) => {}
     );
   };
 
