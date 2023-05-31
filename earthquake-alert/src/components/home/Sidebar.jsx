@@ -373,7 +373,9 @@ const Sidebar = ({
                   isMobile && toggleSidebar();
                 }}
               >
-                {item.name}
+                {item.name.includes(",")
+                  ? item.name.slice(0, item.name.indexOf(","))
+                  : item.name}
               </div>
             ))
           ) : (
@@ -456,7 +458,12 @@ const Sidebar = ({
                           isMobile && toggleSidebar();
                         }}
                       >
-                        {item.shelterAddress}
+                        {item.shelterAddress.includes(",")
+                          ? item.shelterAddress.slice(
+                              0,
+                              item.shelterAddress.indexOf(",")
+                            )
+                          : item.shelterAddress}
                       </div>
                     ))
                   ) : (
