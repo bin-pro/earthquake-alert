@@ -94,23 +94,22 @@ public class EarthquakePushService {
         }
     }
     private boolean isNewAndSignificantEarthquake(EarthquakeDto newEarthquakeDto) {
-        // 첫 번째 지진 데이터를 받았을 때
-        if (lastSentData == null) {
-            return true;
-        }
-        
-        // 마지막으로 보낸 데이터와 시간이 같으면, 새로운 지진이 아닙니다.
-        if (newEarthquakeDto.getTmEqk().equals(lastSentData.getTmEqk())) {
-            return false;
-        }
-    
         // 규모 5.0 이상이면서 fcTp가 11 혹은 14인 지진만 알림을 보냅니다.
         double mt = newEarthquakeDto.getMt();
         int fcTp = newEarthquakeDto.getFcTp();
-
-        lastSentData = newEarthquakeDto;
-        
-        return mt >= 5.0 && (fcTp == 11 || fcTp == 14);
+    
+        // 마지막으로 보낸 데이터가 newEarthquakeDto와 동일한지 확인
+        if (lastSentData != null && lastSentData.equals(newEarthquakeDto)) {
+            return false;
+        }
+    
+        if (mt >= 5.0 && (fcTp == 11 || fcTp == 14)) {
+            lastSentData = newEarthquakeDto;
+            return true;
+        }
+    
+        // 위의 모든 조건이 충족되지 않으면 false 반환
+        return false;
     }
     
     private void sendFCMPushNotification(EarthquakeDto earthquakeDto) {
